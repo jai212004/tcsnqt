@@ -16,6 +16,9 @@ https://takeuforward.org/blogs/interview-preparation/tcs-nqt-sheet?open=17216%2C
 public class Main {
     public static void main(String[] args) {
         System.out.println(addDigits(529));
+        String s = "391";
+        System.out.println(s.charAt(2) - '0' + s.charAt(1) - '0');
+        System.out.println(isDivisibleBy9("23"));
     }
     public static boolean isPalindrome(int n) {
         int orig = n;
@@ -210,6 +213,31 @@ Now single digit is remaining , so we return it.
                 sum = sum + remain;
             }
             return addDigits(sum);
+        }
+    }
+    /*
+    You are given a string s representing a large non-negative integer, return true if it is divisible by 9, otherwise return false.
+
+Due to the large size of the number, you cannot store it in standard numeric data types like int, long, or long long. You must process it as a string.
+
+A number is divisible by 9 if and only if the sum of its digits is divisible by 9.
+
+Example 1:
+Input: s = "69354"
+
+Output: true
+
+Explanation: 6+9+3+5+4 = 27, which is divisible by 9.
+     */
+    public static boolean isDivisibleBy9(String s) {
+        int sum = 0;
+        for (int i = 0 ; i < s.length() ; i++){
+            sum = sum + s.charAt(i) - '0';
+        }
+        if(sum%9==0){
+            return true;
+        }else{
+            return false;
         }
     }
 }
