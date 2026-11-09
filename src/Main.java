@@ -17,6 +17,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.println(isPalindrome(1101));
         System.out.println(isArmstrong(153));
+        System.out.println(fact(5));
+        System.out.println(isStrongNumber(90));
     }
     public static boolean isPalindrome(int n) {
         int orig = n;
@@ -69,5 +71,43 @@ Therefore, it is an Armstrong number.
         }else{
             return false;
         }
+    }
+    /*
+    Given a positive integer N, determine whether it is a Strong Number or not.
+
+A number is considered a Strong Number if the sum of the factorial of its digits is equal to the number itself.
+
+Return "Yes" if the number is a Strong Number, else return "No".
+
+Example 1:
+Input: 145
+
+Output: Yes
+
+Explanation:
+
+1! + 4! + 5! = 1 + 24 + 120 = 145, so it is a Strong Number.
+     */
+
+    public static String isStrongNumber(int n) {
+        int sum = 0;
+        int orig = n;
+        while(n!=0){
+            int remain = n%10;
+            sum = sum + fact(remain);
+            n=n/10;
+        }
+        if(sum == orig){
+            return "Yes";
+        }else{
+            return "No";
+        }
+    }
+
+    public static int fact(int n){
+        if(n==0){
+            return 1;
+        }
+        return n*fact(n-1);
     }
 }
