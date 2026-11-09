@@ -19,6 +19,7 @@ public class Main {
         String s = "391";
         System.out.println(s.charAt(2) - '0' + s.charAt(1) - '0');
         System.out.println(replaceZerosWithOnes(0000));
+        System.out.println(GCD(12 , 20));
     }
     public static boolean isPalindrome(int n) {
         int orig = n;
@@ -262,5 +263,40 @@ Explanation: 0s at 2nd, 4th and 5th positions are replaced with 1.
             N=N/10;
         }
         return orig;
+    }
+    /*
+    You are given two integers n1 and n2. You need find the Greatest Common Divisor (GCD) of the two given numbers. Return the GCD of the two numbers.
+
+The Greatest Common Divisor (GCD) of two integers is the largest positive integer that divides both of the integers.
+
+Example 1:
+Input: n1 = 4, n2 = 6
+
+Output: 2
+
+Explanation: Divisors of n1 = 1, 2, 4, Divisors of n2 = 1, 2, 3, 6
+
+Greatest Common divisor = 2.
+     */
+    public static int GCD(int n1, int n2) {
+        int small = n2;
+        int large = n2;
+        if(n1<n2){
+            small = n1;
+            large = n2;
+        } else if (n1>n2) {
+            small = n2;
+            large = n1;
+        }
+        int count = 0;
+        while(large>=0){
+            large=large-small;
+            count++;
+        }
+        if(n1==n2){
+            return n1;
+        }else{
+            return count;
+        }
     }
 }
