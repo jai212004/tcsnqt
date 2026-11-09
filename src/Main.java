@@ -18,7 +18,7 @@ public class Main {
         System.out.println(addDigits(529));
         String s = "391";
         System.out.println(s.charAt(2) - '0' + s.charAt(1) - '0');
-        System.out.println(isDivisibleBy9("23"));
+        System.out.println(replaceZerosWithOnes(0000));
     }
     public static boolean isPalindrome(int n) {
         int orig = n;
@@ -239,5 +239,28 @@ Explanation: 6+9+3+5+4 = 27, which is divisible by 9.
         }else{
             return false;
         }
+    }
+    /*
+    You are given an integer N. Your task is to return the integer formed by replacing every digit 0 with 1 in the decimal representation of N.
+
+Example 1:
+Input: N = 102003
+
+Output: 112113
+
+Explanation: 0s at 2nd, 4th and 5th positions are replaced with 1.
+     */
+    public static int replaceZerosWithOnes(int N) {
+        int count = 0;
+        int orig = N;
+        while(N!=0){
+            int remain = N%10;
+            if(remain==0){
+                orig = orig + (int)Math.pow(10 , count);
+            }
+            count++;
+            N=N/10;
+        }
+        return orig;
     }
 }
