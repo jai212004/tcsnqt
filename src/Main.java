@@ -15,7 +15,7 @@ https://takeuforward.org/blogs/interview-preparation/tcs-nqt-sheet?open=17216%2C
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println(isHarshad(378));
+        System.out.println(addDigits(529));
     }
     public static boolean isPalindrome(int n) {
         int orig = n;
@@ -26,6 +26,7 @@ public class Main {
             sum = sum*10 + remain;
             n=divisor;
         }
+        System.out.println(sum);
         if(sum==orig){
             return true;
         }else{
@@ -180,6 +181,35 @@ So, it is a Harshad number.
             return true;
         }else{
             return false;
+        }
+    }
+    /*
+    Given an integer num, repeatedly add all its digits until the result has only one digit, and return it.
+
+Example 1:
+Input : num = 529
+
+Output : 7
+
+Explanation : In first iteration the digits sum will be = 5 + 2 + 9 => 16
+
+In second iteration the digits sum will be 1 + 6 => 7.
+
+Now single digit is remaining , so we return it.
+
+
+     */
+    public static int addDigits(int num) {
+        if (num % 10 == num) {
+            return num;
+        } else {
+            int sum = 0;
+            while (num != 0) {
+                int remain = num % 10;
+                num = num / 10;
+                sum = sum + remain;
+            }
+            return addDigits(sum);
         }
     }
 }
