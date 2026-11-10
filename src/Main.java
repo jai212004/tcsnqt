@@ -19,7 +19,7 @@ public class Main {
         String s = "391";
         System.out.println(s.charAt(2) - '0' + s.charAt(1) - '0');
         System.out.println(replaceZerosWithOnes(0000));
-        System.out.println(GCD(12 , 20));
+        System.out.println(GCD(25 , 30));
     }
     public static boolean isPalindrome(int n) {
         int orig = n;
@@ -279,24 +279,16 @@ Explanation: Divisors of n1 = 1, 2, 4, Divisors of n2 = 1, 2, 3, 6
 Greatest Common divisor = 2.
      */
     public static int GCD(int n1, int n2) {
-        int small = n2;
-        int large = n2;
-        if(n1<n2){
-            small = n1;
-            large = n2;
-        } else if (n1>n2) {
-            small = n2;
-            large = n1;
+        while(n1!=n2){
+            if(n1>n2){
+                n1=n1-n2;
+            }else{
+                n2=n2-n1;
+            }
         }
-        int count = 0;
-        while(large>=0){
-            large=large-small;
-            count++;
-        }
-        if(n1==n2){
-            return n1;
-        }else{
-            return count;
-        }
+        return n1;
     }
+    /*
+    optimal approach euclidean theorem -> subtract small from large untill both numbers become same , return that same number.
+     */
 }
