@@ -1,5 +1,11 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
 /*
-you are given an integer n. You need to check whether the number is a palindrome number or not. Return true if it's a palindrome number, otherwise return false.
+you are given an integer n. You need to check whether the number is a palindrome number or not.
+ Return true if it's a palindrome number, otherwise return false.
 
 A palindrome number is a number which reads the same both left to right and right to left.
 
@@ -17,7 +23,8 @@ public class Main {
     public static void main(String[] args) {
         String a = "5/1";
         String b = "3/4";
-        System.out.println(addFractions(a,b));
+        System.out.println(permutations(20 , 20));
+        System.out.println(primeTillN(100));
     }
     public static boolean isPalindrome(int n) {
         int orig = n;
@@ -37,7 +44,8 @@ public class Main {
     }
 
     /*
-    You are given an integer n. You need to check whether it is an armstrong number or not. Return true if it is an armstrong number, otherwise return false.
+    You are given an integer n. You need to check whether it is an armstrong number or not.
+     Return true if it is an armstrong number, otherwise return false.
 
 An armstrong number is a number which is equal to the sum of the digits of the number, raised to the power of the number of digits.
 
@@ -111,7 +119,8 @@ Explanation:
         return n*fact(n-1);
     }
     /*
-    You are given an integer n. You need to check if the number is a perfect number or not. Return true if it is a perfect number, otherwise, return false.
+    You are given an integer n. You need to check if the number is a perfect number or not. Return
+     true if it is a perfect number, otherwise, return false.
 
 A perfect number is a number whose proper divisors (excluding the number itself) add up to the number itself.
 
@@ -217,7 +226,8 @@ Now single digit is remaining , so we return it.
     /*
     You are given a string s representing a large non-negative integer, return true if it is divisible by 9, otherwise return false.
 
-Due to the large size of the number, you cannot store it in standard numeric data types like int, long, or long long. You must process it as a string.
+Due to the large size of the number, you cannot store it in standard numeric data types like int, long, or
+ long long. You must process it as a string.
 
 A number is divisible by 9 if and only if the sum of its digits is divisible by 9.
 
@@ -240,7 +250,8 @@ Explanation: 6+9+3+5+4 = 27, which is divisible by 9.
         }
     }
     /*
-    You are given an integer N. Your task is to return the integer formed by replacing every digit 0 with 1 in the decimal representation of N.
+    You are given an integer N. Your task is to return the integer formed by replacing every digit
+    0 with 1 in the decimal representation of N.
 
 Example 1:
 Input: N = 102003
@@ -263,7 +274,8 @@ Explanation: 0s at 2nd, 4th and 5th positions are replaced with 1.
         return orig;
     }
     /*
-    You are given two integers n1 and n2. You need find the Greatest Common Divisor (GCD) of the two given numbers. Return the GCD of the two numbers.
+    You are given two integers n1 and n2. You need find the Greatest Common Divisor (GCD)
+     of the two given numbers. Return the GCD of the two numbers.
 
 The Greatest Common Divisor (GCD) of two integers is the largest positive integer that divides both of the integers.
 
@@ -299,7 +311,8 @@ Greatest Common divisor = 2.
     optimal approach euclidean theorem -> subtract small from large untill both numbers become same , return that same number.
      */
     /*
-    You are given two integers n1 and n2. You need find the Lowest Common Multiple (LCM) of the two given numbers. Return the LCM of the two numbers.
+    You are given two integers n1 and n2. You need find the Lowest Common Multiple (LCM)
+    of the two given numbers. Return the LCM of the two numbers.
 
 The Lowest Common Multiple (LCM) of two integers is the lowest positive integer that is divisible by both the integers.
 
@@ -395,25 +408,102 @@ Explanation: 3/4 + 1/7 = (3×7 + 1×4)/(4×7) = 25/28
         }
         return sum;
     }
+    /*
+    You are given an integer n. You need to find all the divisors of n. Return all the divisors of n as an array or list in a sorted order.
 
-//    public static int getFract(String word1 , String word2){
-//        int break1 = 0;
-//        int break2 = 0;
-//        for(int i = 0 ; i < word1.length() ; i++){
-//            if(word1.charAt(i)=='/'){
-//                break1=i;
-//                break;
-//            }
-//        }
-//        for(int i = 0 ; i < word2.length() ; i++){
-//            if(word1.charAt(i)=='/'){
-//                break2=i;
-//                break;
-//            }
-//        }
-//        int a1 = conToInt(word1.substring(0, break1-1));
-//        int a2 = conToInt(word1.substring(break1+1, word1.length()-1));
-//        int b1 = conToInt(word2.substring(0, break2-1));
-//        int b2 = conToInt(word2.substring(break2+1, word2.length()-1));
-//    }
+A number which completely divides another number is called it's divisor.
+
+Example 1:
+Input: n = 6
+
+Output = [1, 2, 3, 6]
+
+Explanation: The divisors of 6 are 1, 2, 3, 6.
+     */
+    public static int[] divisors(int n) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        for(int i = 1 ; i <= Math.sqrt(n) ; i++){
+            if(n%i==0){
+                if((n/i)==i){
+                    arr.add(i);
+                    continue;
+                }
+                arr.add(i);
+                arr.add(n/i);
+            }
+        }
+        int length = arr.size();
+        int[] arrr = new int[length];
+        for(int i = 0 ; i < length ; i++){
+            arrr[i] = arr.get(i);
+        }
+        Arrays.sort(arrr);
+        return arrr;
+    }
+    /*
+    You are given two integers N and R representing the number of people and the number of
+     available seats respectively. Your task is to find the number of permutations in which these N people can occupy the R seats.
+
+Please provide your answer with mod of (109 + 7).
+
+Example 1:
+Input: N = 5, R = 3
+
+Output: 60
+
+Explanation: P(5, 3) = 5! / (5 - 3)! = 120 / 2 = 60
+     */
+    public static long permutations(int n, int r) {
+        long modu = 1_000_000_007L;
+        long result = 1;
+        for(int i = n ; i > n-r ; i--){
+            result = (result*i)%modu;
+        }
+        return result;
+    }
+    /*
+    You are given an integer n.
+
+Print all the prime numbers till n (including n).
+
+A prime number is a number that has only two divisor's 1 and the number itself.
+
+Example 1:
+Input : n = 7
+
+Output : [2, 3, 5, 7]
+
+Explanation : The number 2 has only two divisors 1 and 2.
+
+The number 3 has only two divisors 1 and 3.
+
+The number 5 has only two divisors 1 and 5.
+
+The number 7 has only two divisors 1 and 7.
+     */
+    public static ArrayList<Integer> primeTillN(int n) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        boolean[] isPrime = new boolean[n+1];
+        Arrays.fill(isPrime , true);
+        isPrime[0] = false;
+        isPrime[1] = false;
+        for(int i = 2 ; i <= Math.sqrt(n) ; i++){
+            if(isPrime[i]){
+                for(int j = i*i ; j <= n ; j=j+i){
+                    isPrime[j]=false;
+                }
+            }
+        }
+        for(int i = 0 ; i <= n ; i++){
+            if(isPrime[i]){
+                arr.add(i);
+            }
+        }
+        return arr;
+        /*
+        Every composite number n can be written as a × b with a factor of at most √n (other than 1), so the sieve only
+        needs to cross out multiples of numbers up to √n, because the other factor in each pair is just the same pair flipped.
+         */
+    }
+
 }
