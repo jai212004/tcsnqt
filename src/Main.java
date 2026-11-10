@@ -19,7 +19,7 @@ public class Main {
         String s = "391";
         System.out.println(s.charAt(2) - '0' + s.charAt(1) - '0');
         System.out.println(replaceZerosWithOnes(0000));
-        System.out.println(GCD(25 , 30));
+        System.out.println(LCM(25 , 30));
     }
     public static boolean isPalindrome(int n) {
         int orig = n;
@@ -290,5 +290,26 @@ Greatest Common divisor = 2.
     }
     /*
     optimal approach euclidean theorem -> subtract small from large untill both numbers become same , return that same number.
+     */
+    /*
+    You are given two integers n1 and n2. You need find the Lowest Common Multiple (LCM) of the two given numbers. Return the LCM of the two numbers.
+
+The Lowest Common Multiple (LCM) of two integers is the lowest positive integer that is divisible by both the integers.
+
+Example 1:
+Input: n1 = 4, n2 = 6
+
+Output: 12
+
+Explanation: 4 * 3 = 12, 6 * 2 = 12.
+
+12 is the lowest integer that is divisible both 4 and 6.
+     */
+    public static int LCM(int n1, int n2) {
+        int Lcm = (n1*n2)/GCD(n1,n2);
+        return Lcm;
+    }
+    /*
+    optimal approach = hcf(n1,n2) * lcm(n1,n2) = n1*n2
      */
 }
