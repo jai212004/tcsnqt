@@ -15,11 +15,9 @@ https://takeuforward.org/blogs/interview-preparation/tcs-nqt-sheet?open=17216%2C
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println(addDigits(529));
-        String s = "391";
-        System.out.println(s.charAt(2) - '0' + s.charAt(1) - '0');
-        System.out.println(replaceZerosWithOnes(0000));
-        System.out.println(LCM(25 , 30));
+        String a = "5/1";
+        String b = "3/4";
+        System.out.println(addFractions(a,b));
     }
     public static boolean isPalindrome(int n) {
         int orig = n;
@@ -278,13 +276,22 @@ Explanation: Divisors of n1 = 1, 2, 4, Divisors of n2 = 1, 2, 3, 6
 
 Greatest Common divisor = 2.
      */
-    public static int GCD(int n1, int n2) {
+    public static int GCD1(int n1, int n2) {
         while(n1!=n2){
             if(n1>n2){
                 n1=n1-n2;
             }else{
                 n2=n2-n1;
             }
+        }
+        return n1;
+    }
+
+    public static int GCD(int n1 , int n2){
+        while(n2!=0){
+            int temp = n2;
+            n2 = n1%n2;
+            n1 = temp;
         }
         return n1;
     }
@@ -312,4 +319,101 @@ Explanation: 4 * 3 = 12, 6 * 2 = 12.
     /*
     optimal approach = hcf(n1,n2) * lcm(n1,n2) = n1*n2
      */
+    public static int LCMbrute(int n1 , int n2){
+        int lcm = n1;
+        int min = n1;
+        if(n1>n2){
+            min = n2;
+        }
+        while(true) {
+            if (min % n1 == 0 && min % n2 == 0){
+                lcm = min;
+                break;
+            }
+            min++;
+        }
+        return lcm;
+    }
+    /*
+    You are given two fractions as strings in the form "a/b" and "c/d" where a, b, c, and d are positive integers and b ≠ 0, d ≠ 0.
+
+Your task is to add the two fractions and return their sum in the simplest form as a string "x/y".
+
+Example 1:
+Input: frac1 = "3/4", frac2 = "1/7"
+
+Output: "25/28"
+
+Explanation: 3/4 + 1/7 = (3×7 + 1×4)/(4×7) = 25/28
+     */
+    public static String addFractions(String word1, String word2) {
+        int break1 = 0;
+        int break2 = 0;
+        for(int i = 0 ; i < word1.length() ; i++){
+            if(word1.charAt(i)=='/'){
+                break1=i;
+                break;
+            }
+        }
+        for(int i = 0 ; i < word2.length() ; i++){
+            if(word2.charAt(i)=='/'){
+                break2=i;
+                break;
+            }
+        }
+        int a1 = conToInt(word1.substring(0, break1));
+        int a2 = conToInt(word1.substring(break1+1));
+        int b1 = conToInt(word2.substring(0, break2));
+        int b2 = conToInt(word2.substring(break2+1));
+        //((a1*b2)+(a2*b1))/b2*b1
+        int num = a1*b2 + a2*b1;
+        int denom = a2*b2;
+        System.out.println(num);
+        System.out.println(denom);
+        int hcf = GCD(num , denom);
+        if(num%denom==0){
+            num = num/denom;
+            denom = 1;
+        }else{
+//        System.out.println(num);
+//        System.out.println(denom);
+//        System.out.println(hcf);
+        num = num/hcf;
+        denom = denom/hcf;
+        }
+        String res = num + "/" + denom;
+        return res;
+    }
+
+    public static int conToInt(String word){
+        int sum = 0;
+        int length = word.length();
+        for(int i = 0 ; i<length ; i++){
+            int remain = (word.charAt(i)-'0');
+            sum = sum*10+remain;
+            //System.out.println(sum);
+        }
+        return sum;
+    }
+
+//    public static int getFract(String word1 , String word2){
+//        int break1 = 0;
+//        int break2 = 0;
+//        for(int i = 0 ; i < word1.length() ; i++){
+//            if(word1.charAt(i)=='/'){
+//                break1=i;
+//                break;
+//            }
+//        }
+//        for(int i = 0 ; i < word2.length() ; i++){
+//            if(word1.charAt(i)=='/'){
+//                break2=i;
+//                break;
+//            }
+//        }
+//        int a1 = conToInt(word1.substring(0, break1-1));
+//        int a2 = conToInt(word1.substring(break1+1, word1.length()-1));
+//        int b1 = conToInt(word2.substring(0, break2-1));
+//        int b2 = conToInt(word2.substring(break2+1, word2.length()-1));
+//    }
 }
